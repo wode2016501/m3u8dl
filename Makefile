@@ -76,7 +76,7 @@ $(TS_MAKEFILE): $(RAW_M3U8) | $(TS_DIR)
 		echo "MKDIR = $(MKDIR)"; \
 		echo ".PHONY: all_ts"; \
 		echo -n "all_ts: \$$(TS_DIR) "; \
-		$(GREP) -v '^#' $(RAW_M3U8) | $(GREP) '\.ts' | $(SED) 's/\r$$//' | while read line; do \
+		$(GREP) -v '^#' $(RAW_M3U8)| $(SED) 's/\r$$//' | while read line; do \
 			case "$$line" in \
 				http://*|https://*) url="$$line";; \
 				/*) url="$$domain$$line";; \
@@ -106,7 +106,7 @@ $(TS_MAKEFILE): $(RAW_M3U8) | $(TS_DIR)
 	@echo "生成完成，共 $$(grep -c '\.ts' $(RAW_M3U8)) 个片段"
 
 download_ts: $(TS_MAKEFILE)
-	@echo "并行下载 TS（$(THREADS) 线程）..."
+	@echo "并行下载 TS（ 线程）..."
 	@$(MAKE) -f $(TS_MAKEFILE)  all_ts
 
 $(TS_DIR):
